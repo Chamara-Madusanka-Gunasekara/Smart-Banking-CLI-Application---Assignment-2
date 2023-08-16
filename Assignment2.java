@@ -1,7 +1,7 @@
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Assignment2{
+public class Assignment2 {
     private final static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
         final String clear = "\033[H\033[2J";
@@ -18,9 +18,8 @@ public class Assignment2{
         String screen = Dashboard;
 
         //Arrays
-        String[] AccId = new String[0];
-        String[] names = new String[0];
-        int[] initialDepo = new int[0];
+        String[][] details = new String[0][3];
+
 
         main_loop:
         do{
@@ -83,14 +82,6 @@ public class Assignment2{
                                 }
                             }
                         }
-                        //Ids Store in a array
-                        String[] newAcId = new String[AccId.length+1];
-                        for (int i = 0; i < AccId.length; i++) {
-                            newAcId[i] = AccId[i];
-                        }
-                        newAcId[newAcId.length -1] = id;
-                        AccId = newAcId;
-                        System.out.println(Arrays.toString(AccId));
                         //Initial Desposit
                         do{
                             System.out.print("Initial Deposit: ");
@@ -106,22 +97,27 @@ public class Assignment2{
                                 break;
                             }
                         }while(true);
-                        //Names Store in a array
-                        String[] newNames = new String[names.length+1];
-                        for (int i = 0; i < names.length; i++) {
-                            newNames[i] = names[i];
-                        }
-                        newNames[newNames.length -1] = accName;
-                        names = newNames;
 
-                        //Deposits Store in a array
-                        int[] newDepo = new int[initialDepo.length+1];
-                        for (int i = 0; i < initialDepo.length; i++) {
-                            newDepo[i] = initialDepo[i];
+                        //Store details
+                        String[][] newDetails = new String[details.length+1][3];
+
+                        for (int i = 0; i < details.length; i++) {
+                            newDetails[i]=details[i];
                         }
-                        newDepo[newDepo.length -1] = initDepo;
-                        newDepo = initialDepo;
+
+                        newDetails[newDetails.length-1][0]=id;
+                        newDetails[newDetails.length-1][1]=accName;
+                        newDetails[newDetails.length-1][2]=String.format("%s", initDepo);
+
+                        details=newDetails;
+
+                        for (int i = 0; i < details.length; i++) {
+                            System.out.println(Arrays.toString(details[i]));
+                        }
+
+                        
                         System.out.print("Do you want to Open another Account? (Y/N) >> ");
+
                         if(scanner.nextLine().strip().toUpperCase().equals("Y")){
                             x++;
                             continue;
